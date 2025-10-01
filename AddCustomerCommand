@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class AddCustomerCommand implements Command {
+
+    @Override
+    public void execute(Scanner scanner, CustomerList customerList) {
+        System.out.println("---------------------添加客户---------------------");
+
+        System.out.print("姓名：");
+        String name = scanner.nextLine();
+
+        System.out.print("性别(男/女)：");
+        char gender = scanner.nextLine().charAt(0);
+
+        System.out.print("年龄：");
+        int age = Integer.parseInt(scanner.nextLine());
+
+        System.out.print("电话：");
+        String phone = scanner.nextLine();
+
+        System.out.print("邮箱：");
+        String email = scanner.nextLine();
+
+        Customer newCustomer = new Customer(name, gender, age, phone, email);
+
+        if (customerList.addCustomer(newCustomer)) {
+            System.out.println("---------------------添加完成，ID为 " + newCustomer.getId() + "---------------------");
+        } else {
+            System.out.println("添加失败！");
+        }
+    }
+}
