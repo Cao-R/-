@@ -1,0 +1,10 @@
+import java.util.Scanner;
+
+public interface Command {
+    /**
+     * 执行命令的具体操作。
+     * @param scanner 用来接收用户输入。
+     * @param customerList 用来操作客户数据。
+     */
+    void execute(Scanner scanner, CustomerList customerList);
+}
