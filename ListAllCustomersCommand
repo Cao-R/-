@@ -1,0 +1,22 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ListAllCustomersCommand implements Command {
+    @Override
+    public void execute(Scanner scanner, CustomerList customerList) {
+        System.out.println("---------------------------客户列表---------------------------");
+
+        ArrayList<Customer> allCustomers = customerList.getAllCustomers();
+
+        if (allCustomers.isEmpty()) {
+            System.out.println("当前没有任何客户记录！");
+            return;
+        }
+
+        System.out.println("ID\t\t姓名\t\t性别\t\t年龄\t\t电话\t\t\t邮箱");
+        for (Customer cust : allCustomers) {    
+            System.out.println(cust);
+        }
+        System.out.println("-------------------------客户列表完成-------------------------");
+    }
+}
