@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+public class ModifyCustomerCommand implements Command {
+    @Override
+    public void execute(Scanner scanner, CustomerList customerList) {
+        System.out.println("---------------------修改客户信息---------------------");
+        System.out.print("请输入待修改客户的编号(-1退出)：");
+        int id;
+        try {
+            id = Integer.parseInt(scanner.nextLine());
+        } catch(NumberFormatException e) {
+            System.out.println("输入无效，请输入数字ID。");
+            return;
+        }
+
+        if (id == -1) return;
+
+        Customer cust = customerList.getCustomerById(id);
+
+        if (cust == null) {
+            System.out.println("错误：找不到该客户！");
+            return;
+        }
+
+        System.out.println("找到了客户: " + cust);
+        System.out.println("提示: 直接按回车键表示不修改此项。");
+
+        System.out.print("姓名(" + cust.getName() + ")：");
+        String name = scanner.nextLine();
+        if (!name.isEmpty()) cust.setName(name);
+
+        System.out.print("性别(" + cust.getGender() + ")：");
+        String genderStr = scanner.nextLine();
+        if (!genderStr.isEmpty()) cust.setGender(genderStr.charAt(0));
+
+        System.out.print("年龄(" + cust.getAge() + ")：");
+        String ageStr = scanner.nextLine();
+        if (!ageStr.isEmpty()) cust.setAge(Integer.parseInt(ageStr));
+
+        System.out.print("电话(" + cust.getPhone() + ")：");
+        String phone = scanner.nextLine();
+        if (!phone.isEmpty()) cust.setPhone(phone);
+
+        System.out.print("邮箱(" + cust.getEmail() + ")：");
+        String email = scanner.nextLine();
+        if (!email.isEmpty()) cust.setEmail(email);
+
+        System.out.println("---------------------修改完成---------------------");
+    }
+}
