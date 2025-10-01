@@ -1,0 +1,82 @@
+public class Customer {
+
+    // 1. 属性全部设为私有(private)，并采用小驼峰命名(camelCase)
+    private int id;
+    private String name;
+    private char gender;
+    private int age;
+    private String phone;
+    private String email;
+
+    // 2. 静态变量，用于为所有客户对象自动生成唯一的、递增的ID
+    private static int nextId = 1;
+
+    /**
+     * 构造方法。当创建一个新的客户对象时，会自动为其分配一个唯一的ID。
+     */
+    public Customer(String name, char gender, int age, String phone, String email) {
+        this.id = nextId++; // 自动分配ID并自增
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    // --- 3. 为所有私有属性提供 public 的 getter 和 setter 方法 ---
+
+    // id 只有 getter，因为一旦创建就不应该被修改，是只读的
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        if (age > 0 && age < 120) { // 在setter中加入数据校验逻辑
+            this.age = age;
+        }
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * 4. 重写 toString() 方法，方便直接打印对象信息。
+     */
+    @Override
+    public String toString() {
+        return id + "\t\t" + name + "\t\t" + gender + "\t\t" + age + "\t\t" + phone + "\t\t" + email;
+    }
+}
