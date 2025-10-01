@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class DeleteCustomerCommand implements Command {
+    @Override
+    public void execute(Scanner scanner, CustomerList customerList) {
+        System.out.println("---------------------删除客户---------------------");
+        System.out.print("请输入待删除客户的编号(-1退出)：");
+        int id;
+        try {
+            id = Integer.parseInt(scanner.nextLine());
+        } catch(NumberFormatException e) {
+            System.out.println("输入无效，请输入数字ID。");
+            return;
+        }
+
+        if (id == -1) return;
+
+        Customer cust = customerList.getCustomerById(id);
+        if (cust == null) {
+            System.out.println("删除失败：找不到该客户。");
+            return;
+        }
+
+        System.out.println("找到了客户: " + cust);
+        System.out.print("确认是否删除(Y/N)：");
+        char confirm = scanner.nextLine().toUpperCase().charAt(0);
+
+        if (confirm == 'Y') {
+            if (customerList.deleteCustomer(id)) {
+                System.out.println("---------------------删除成功---------------------");
+            } else {
+                System.out.println("删除失败！");
+            }
+        } else {
+            System.out.println("已取消删除。");
+        }
+    }
+}
